@@ -1,3 +1,0 @@
-/home/samuliak/Documents/lvnd/vulkan/build/CMakeFiles/lvnd.dir
-/home/samuliak/Documents/lvnd/vulkan/build/CMakeFiles/edit_cache.dir
-/home/samuliak/Documents/lvnd/vulkan/build/CMakeFiles/rebuild_cache.dir

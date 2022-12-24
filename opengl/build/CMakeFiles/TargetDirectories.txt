@@ -1,3 +1,0 @@
-/home/samuliak/Documents/lvnd/opengl/build/CMakeFiles/lvnd.dir
-/home/samuliak/Documents/lvnd/opengl/build/CMakeFiles/edit_cache.dir
-/home/samuliak/Documents/lvnd/opengl/build/CMakeFiles/rebuild_cache.dir

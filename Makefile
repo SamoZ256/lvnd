@@ -1,15 +1,15 @@
 bnobackend:
-	cmake . -B nobackend/build
-	make -C nobackend/build
+	cmake . -B build/nobackend
+	make -C build/nobackend
 
 bvulkan:
-	cmake . -DBACKEND_VULKAN=ON -B vulkan/build
-	make -C vulkan/build
+	cmake . -DBACKEND_VULKAN=ON -B build/vulkan
+	make -C build/vulkan
 
 bmetal:
-	cmake . -DBACKEND_METAL=ON -B metal/build
-	make -C metal/build
+	cmake . -DBACKEND_METAL=ON -B build/metal
+	make -C build/metal
 
 bopengl:
-	cmake . -DBACKEND_OPENGL=ON -B opengl/build
-	make -C opengl/build
+	cmake . -DBACKEND_OPENGL=ON -B build/opengl
+	make -C build/opengl

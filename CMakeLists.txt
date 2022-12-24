@@ -61,7 +61,7 @@ else ()
     set(BACKEND nobackend)
 endif ()
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/${BACKEND}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib/${BACKEND})
 
 project(lvnd)
 
