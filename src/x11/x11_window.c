@@ -6,9 +6,6 @@
 void x11_lvndCreateWindow(LvndWindow* window, uint16_t width, uint16_t height, const char* title) {
     window->handle = (X11_LvndWindowHandle*)malloc(sizeof(X11_LvndWindowHandle));
 
-    //OpenGL objects
-    window->handle->openglDrawable = 0;
-
     window->handle->display = XOpenDisplay((char*)0);
     window->handle->screen = DefaultScreen(window->handle->display);
     window->handle->black = BlackPixel(window->handle->display, window->handle->screen);

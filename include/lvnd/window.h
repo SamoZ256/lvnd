@@ -25,6 +25,8 @@ typedef struct LvndWindow {
 #elif defined _WIN32
     Win32_LvndWindowHandle* handle;
 #endif
+    bool contextInitialized;
+
     void* userPtr;
 
     struct LvndCallbacks {

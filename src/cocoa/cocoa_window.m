@@ -472,11 +472,6 @@ void cocoa_lvndCreateWindow(LvndWindow* window, uint16_t width, uint16_t height,
     mach_timebase_info(&timeInfo);
     window->handle->frequency = (timeInfo.denom * 1e9) / timeInfo.numer;
 
-    //OpenGL objects
-    window->handle->openglContext = NULL;
-    window->handle->openglFramework = NULL;
-    window->handle->openglPixelFormat = NULL;
-
     window->handle->appDelegate = [NSApp delegate];
     if (window->handle->appDelegate == NULL) {
         LVND_ERROR("Failed to create NS application delegate");

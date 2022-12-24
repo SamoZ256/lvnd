@@ -6,6 +6,7 @@ void _lvndOpenGLCreateContext(LvndWindow* window) {
 #ifdef __APPLE__
     cocoa_lvndOpenGLCreateContext(window);
 #endif
+    window->contextInitialized = true;
 }
 
 void _lvndOpenGLDestroyContext(LvndWindow* window) {

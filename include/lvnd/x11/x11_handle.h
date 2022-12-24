@@ -7,7 +7,8 @@
 #include <X11/Xutil.h>
 #include <X11/Xos.h>
 
-typedef unsigned long GLXDrawable;
+typedef struct __GLXcontextRec* GLXContext;
+typedef XID GLXWindow;
 
 typedef struct X11_LvndWindowHandle {
     Display* display;
@@ -15,7 +16,8 @@ typedef struct X11_LvndWindowHandle {
     Window window;
     GC gc;
 
-    GLXDrawable openglDrawable; //OpenGL optional
+    GLXContext openglContext; //OpenGL optional
+    GLXWindow openglWindow; //OpenGL optional
 
     unsigned long black, white;
 

@@ -19,6 +19,8 @@ LvndWindow* _lvndCreateWindow(uint16_t width, uint16_t height, const char* title
 #elif defined _WIN32
     win32_lvndCreateWindow(window, width, height, title);
 #endif
+    window->contextInitialized = false;
+
     window->userPtr = NULL;
     window->width = width;
     window->height = height;

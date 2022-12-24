@@ -1,6 +1,8 @@
 #ifndef LVND_COMMON_H
 #define LVND_COMMON_H
 
+#include <stdio.h>
+
 #define LVND_VERSION_MAJOR 1
 #define LVND_VERSION_MINOR 0
 #define LVND_VERSION_REVISION 0
@@ -26,24 +28,9 @@ if (ptr == NULL) { \
     LVND_ERROR("'" #ptr "' must be a valid pointer"); \
 }
 
-#ifdef __APPLE__
-
 #define LVND_VALIDATE_OPENGL_CONTEXT(window) \
-if (window->handle->openglContext == NULL) { \
+if (!window->contextInitialized) { \
     LVND_ERROR("OpenGL context must be initialized before a call to this function"); \
 }
-
-#elif defined linux
-
-#define LVND_VALIDATE_OPENGL_CONTEXT(window) \
-if (window->handle->openglDrawable == 0) { \
-    LVND_ERROR("OpenGL context must be initialized before a call to this function"); \
-}
-
-#elif defined _WIN32
-
-//TODO: implement OpenGL error on windows
-
-#endif
 
 #endif
