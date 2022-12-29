@@ -134,6 +134,17 @@ typedef enum LvndKey {
     LVND_KEY_UNDEFINED
 } LvndKey;
 
+//---------------- LvndModifier ----------------
+#define LVND_TOTAL_MODIFIER_COUNT 9
+
+typedef enum LvndModifier {
+    LVND_MODIFIER_SHIFT         = 0b1,
+    LVND_MODIFIER_ALT           = 0b10,
+    LVND_MODIFIER_SUPER         = 0b100,
+    LVND_MODIFIER_CONTROL       = 0b1000,
+    LVND_MODIFIER_CAPS_LOCK     = 0b10000
+} LvndModifier;
+
 //---------------- LvndMouseButton ----------------
 #define LVND_TOTAL_MOUSE_BUTTON_COUNT 3
 

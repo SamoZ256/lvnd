@@ -102,6 +102,35 @@ static inline void lvndMenuAddMenuItem(LvndMenu* menu, LvndMenuItem* menuItem) {
     _lvndMenuAddMenuItem(menu, menuItem);
 }
 
+/*! @brief Adds a separator to a menu object.
+ *
+ *  This function adds a separator to a menu object.
+ * 
+ *  @param[in] menu The menu object the separator to be added to.
+*/
+static inline void lvndMenuAddSeparator(LvndMenu* menu) {
+#ifdef LVND_DEBUG
+    LVND_VALIDATE_POINTER(menu);
+#endif
+    _lvndMenuAddSeparator(menu);
+}
+
+/*! @brief Adds a menu object to a menu object.
+ *
+ *  This function adds a menu object to a menu object. Each menu object can be added to an 
+ *  unlimited number of menu objects.
+ * 
+ *  @param[in] menu The menu object the menu object to be added to.
+ *  @param[in] menu2 The menu object to be added.
+*/
+static inline void lvndMenuAddMenu(LvndMenu* menu, LvndMenu* menu2) {
+#ifdef LVND_DEBUG
+    LVND_VALIDATE_POINTER(menu);
+    LVND_VALIDATE_POINTER(menu2);
+#endif
+    _lvndMenuAddMenu(menu, menu2);
+}
+
 /*! @brief Adds a menu object to a menu bar object.
  *
  *  This function adds a menu object to a menu bar object.
@@ -370,6 +399,14 @@ static inline void lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscre
     LVND_VALIDATE_WINDOW(window);
 #endif
     _lvndSetWindowFullscreenMode(window, fullscreen);
+}
+
+static inline bool lvndGetModifier(LvndWindow* window, LvndModifier modifier) {
+#ifdef LVND_DEBUG
+    LVND_VALIDATE_INIT;
+    LVND_VALIDATE_WINDOW(window);
+#endif
+    return _lvndGetModifier(window, modifier);
 }
 
 static inline void lvndSetWindowUserPointer(LvndWindow* window, void* userPtr) {

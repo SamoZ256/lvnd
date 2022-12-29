@@ -35,6 +35,7 @@ LvndWindow* _lvndCreateWindow(uint16_t width, uint16_t height, const char* title
         window->keys[i] = LVND_STATE_RELEASED;
     for (uint16_t i = 0; i < LVND_TOTAL_MOUSE_BUTTON_COUNT; i++)
         window->mouseButtons[i] = LVND_STATE_RELEASED;
+    window->modifiers = 0;
     
     window->mouseX = 0;
     window->mouseY = 0;
@@ -144,6 +145,10 @@ void _lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen) {
 #elif defined _WIN32
     win32_lvndSetWindowFullscreenMode(window, fullscreen);
 #endif
+}
+
+bool _lvndGetModifier(LvndWindow* window, LvndModifier modifier) {
+    return window->modifiers & modifier;
 }
 
 //User pointer

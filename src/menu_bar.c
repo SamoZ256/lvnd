@@ -19,6 +19,7 @@ LvndMenu* _lvndCreateMenu(const char* title) {
 
     menu->title = title;
     menu->menuItems = lvndCreateVector(LVND_DEFAULT_VECTOR_CAPACITY);
+    menu->menuItemTypes = lvndCreateVector(LVND_DEFAULT_VECTOR_CAPACITY);
 
     return menu;
 }
@@ -35,6 +36,17 @@ LvndMenuBar* _lvndCreateMenuBar() {
 
 void _lvndMenuAddMenuItem(LvndMenu* menu, LvndMenuItem* menuItem) {
     lvndVectorPushBack(menu->menuItems, menuItem);
+    lvndVectorPushBack(menu->menuItemTypes, (void*)LVND_MENU_ITEM_TYPE_ITEM);
+}
+
+void _lvndMenuAddSeparator(LvndMenu* menu) {
+    lvndVectorPushBack(menu->menuItems, NULL);
+    lvndVectorPushBack(menu->menuItemTypes, (void*)LVND_MENU_ITEM_TYPE_SEPARATOR);
+}
+
+void _lvndMenuAddMenu(LvndMenu* menu, LvndMenu* menu2) {
+    lvndVectorPushBack(menu->menuItems, menu2);
+    lvndVectorPushBack(menu->menuItemTypes, (void*)LVND_MENU_ITEM_TYPE_MENU);
 }
 
 void _lvndMenuBarAddMenu(LvndMenuBar* menuBar, LvndMenu* menu) {

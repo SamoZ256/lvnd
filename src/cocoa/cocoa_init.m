@@ -33,7 +33,30 @@
 
 //Helpers
 
-void _cocoa_lvndCreateMenuBar(LvndMenuBar* menuBar) {
+void _cocoa_lvndCreateMenu(NSMenu* bar, LvndMenu* menu) {
+    NSMenuItem* customMenuItem = [bar addItemWithTitle:@(menu->title) action:NULL keyEquivalent:@""];
+    NSMenu* customMenu = [[NSMenu alloc] initWithTitle:@(menu->title)];
+    [customMenuItem setSubmenu:customMenu];
+
+    for (uint16_t j = 0; j < menu->menuItems->size; j++) {
+        LvndMenuItemType itemType = (LvndMenuItemType)lvndVectorGet(menu->menuItemTypes, j);
+        if (itemType == LVND_MENU_ITEM_TYPE_ITEM) {
+            LvndMenuItem* menuItem = lvndVectorGet(menu->menuItems, j);
+            NSLvndMenuItem* crntItem = [[NSLvndMenuItem alloc] initWithTitle:@(menuItem->title)
+                                                            action:@selector(menuItemClicked:)
+                                                            keyEquivalent:@(menuItem->keyBinding)
+                                                            userAction:menuItem->action];
+            [customMenu addItem:crntItem];
+        } else if (itemType == LVND_MENU_ITEM_TYPE_SEPARATOR) {
+            [customMenu addItem:[NSMenuItem separatorItem]];
+        } else if (itemType == LVND_MENU_ITEM_TYPE_MENU) {
+            LvndMenu* newMenu = lvndVectorGet(menu->menuItems, j);
+            _cocoa_lvndCreateMenu(customMenu, newMenu);
+        }
+    }
+}
+
+void _cocoa_lvndCreateMenuBar() {
     NSString* appName = @"My App";
 
     NSMenu* bar = [[NSMenu alloc] init];
@@ -87,28 +110,12 @@ void _cocoa_lvndCreateMenuBar(LvndMenuBar* menuBar) {
                           action:@selector(arrangeInFront:)
                    keyEquivalent:@""];
     
-    if (menuBar != NULL) {
+    if (g_lvndContext.globalMenuBar != NULL) {
         //NSLog(@"Creating custom menu bar");
 
-        for (uint16_t i = 0; i < menuBar->menus->size; i++) {
-            LvndMenu* menu = lvndVectorGet(menuBar->menus, i);
-            NSMenuItem* customMenuItem = [bar addItemWithTitle:@"" action:NULL keyEquivalent:@""];
-            NSMenu* customMenu = [[NSMenu alloc] initWithTitle:@(menu->title)];
-            [customMenuItem setSubmenu:customMenu];
-
-            for (uint16_t j = 0; j < menu->menuItems->size; j++) {
-                LvndMenuItem* menuItem = lvndVectorGet(menu->menuItems, j);
-
-                //Convert function pointer to selector
-                //IMP imp = imp_implementationWithBlock(^ (id self) { menuItem->action(); } );
-                //class_addMethod([NSObject class], @selector(action), imp);
-
-                NSLvndMenuItem* crntItem = [[NSLvndMenuItem alloc] initWithTitle:@(menuItem->title)
-                                                                   action:@selector(menuItemClicked:)
-                                                                   keyEquivalent:@(menuItem->keyBinding)
-                                                                   userAction:menuItem->action];
-                [customMenu addItem:crntItem];
-            }
+        for (uint16_t i = 0; i < g_lvndContext.globalMenuBar->menus->size; i++) {
+            LvndMenu* menu = lvndVectorGet(g_lvndContext.globalMenuBar->menus, i);
+            _cocoa_lvndCreateMenu(bar, menu);
         }
     }
     
@@ -123,10 +130,8 @@ void _cocoa_lvndCreateMenuBar(LvndMenuBar* menuBar) {
 //Application Delegate
 
 @interface LvndApplicationDelegate : NSObject <NSApplicationDelegate> {
-    LvndMenuBar* menuBar;
+    
 }
-
-- (instancetype)initWithMenuBar:(LvndMenuBar*)initMenuBar;
 
 - (void) menuItemClicked:(id) sender;
 
@@ -136,15 +141,6 @@ void _cocoa_lvndCreateMenuBar(LvndMenuBar* menuBar) {
 
 - (void) menuItemClicked:(id) sender {
     [(NSLvndMenuItem*)sender clickedAction:sender];
-}
-
-- (instancetype)initWithMenuBar:(LvndMenuBar*)initMenuBar {
-    self = [super init];
-    if (self != nil) {
-        menuBar = initMenuBar;
-    }
-
-    return self;
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
@@ -159,7 +155,7 @@ void _cocoa_lvndCreateMenuBar(LvndMenuBar* menuBar) {
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification {
     //NSLog(@"Creating menu bar");
-    _cocoa_lvndCreateMenuBar(menuBar);
+    _cocoa_lvndCreateMenuBar();
     //NSLog(@"Created menu bar");
 }
 
@@ -198,7 +194,7 @@ void cocoa_lvndInit() {
 
     [NSApplication sharedApplication];
 
-    id appDelegate = [[LvndApplicationDelegate alloc] initWithMenuBar:g_lvndContext.globalMenuBar];
+    id appDelegate = [[LvndApplicationDelegate alloc] init];
     [NSApp setDelegate:appDelegate];
 
     NSEvent* (^block)(NSEvent*) = ^ NSEvent* (NSEvent* event)

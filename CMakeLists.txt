@@ -36,12 +36,10 @@ if (BACKEND_VULKAN)
 
     if (APPLE)
         include_directories(
-            "/usr/local/Cellar/Vulkan/macOS/include"
+            "/Users/samuliak/VulkanSDK/1.3.236.0/macOS/include"
         )
     elseif (WIN32)
-        include_directories(
-            "/usr/local/Cellar/Vulkan/macOS/include" #TODO: find out where is vulkan saved
-        )
+        find_package(Vulkan REQUIRED)
     endif ()
 elseif (BACKEND_METAL)
     message("Building using metal backend")
@@ -104,14 +102,16 @@ if (BACKEND_VULKAN)
         ${vulkanSrc}
     )
 
-    find_library (
-        VULKAN_LIB
-        NAMES vulkan libvulkan # what to look for
-        HINTS "/usr/local/Cellar/Vulkan/macOS/lib" # where to look
-    )
+    if (APPLE)
+        find_library (
+            Vulkan_LIBRARIES
+            NAMES vulkan libvulkan # what to look for
+            HINTS "/Users/samuliak/VulkanSDK/1.3.236.0/macOS/lib" # where to look
+        )
+    endif ()
 
     target_link_libraries(lvnd
-        ${VULKAN_LIB}
+        ${Vulkan_LIBRARIES}
     )
 elseif (BACKEND_METAL)
     file(GLOB metalSrc

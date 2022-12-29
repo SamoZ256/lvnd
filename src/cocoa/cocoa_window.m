@@ -8,23 +8,23 @@
 
 #include "lvnd/cocoa/cocoa_key_bindings.h"
 
-#define PROCESS_MODIFIERS(flags, newState)          \
-if (flags & NSEventModifierFlagShift)               \
-    window->keys[LVND_KEY_LEFT_SHIFT] = newState;   \
-if (flags & NSEventModifierFlagControl)             \
-    window->keys[LVND_KEY_LEFT_CONTROL] = newState; \
-if (flags & NSEventModifierFlagOption)              \
-    window->keys[LVND_KEY_LEFT_ALT] = newState;     \
-if (flags & NSEventModifierFlagCommand)             \
-    window->keys[LVND_KEY_LEFT_SUPER] = newState;   \
-if (flags & NSEventModifierFlagCapsLock)            \
-    window->keys[LVND_KEY_CAPS_LOCK] = newState;    \
+#define PROCESS_MODIFIERS(modifiers, flags) \
+modifiers = 0; \
+if (flags & NSEventModifierFlagShift) \
+    modifiers |= LVND_MODIFIER_SHIFT; \
+if (flags & NSEventModifierFlagControl) \
+    modifiers |= LVND_MODIFIER_CONTROL; \
+if (flags & NSEventModifierFlagOption) \
+    modifiers |= LVND_MODIFIER_ALT; \
+if (flags & NSEventModifierFlagCommand) \
+    modifiers |= LVND_MODIFIER_SUPER; \
+if (flags & NSEventModifierFlagCapsLock) \
+    modifiers |= LVND_MODIFIER_CAPS_LOCK;
 
 static const NSRange nsEmptyRange = { NSNotFound, 0 };
 
 //Helpers
 LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
-    //TODO: convert the key by using predefined array
     LvndKey key = KeyNSToLvndBindings[nsKey];
     //NSLog(@"Key code %u : %hu", key, nsKey);
 
@@ -68,6 +68,9 @@ LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
         window->width = contentRect.size.width;
         window->height = contentRect.size.height;
 
+        window->framebufferWidth = fbRect.size.width;
+        window->framebufferHeight = fbRect.size.height;
+
         if (window->callbacks.windowResizeCallback != NULL) {
             //NSLog(@"Window resize 1");
             window->callbacks.windowResizeCallback(window, window->width, window->height);
@@ -78,8 +81,6 @@ LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
     }
 
     //if (window->framebufferWidth != fbRect.size.width || window->framebufferHeight != fbRect.size.height) {
-    window->framebufferWidth = fbRect.size.width;
-    window->framebufferHeight = fbRect.size.height;
     //}
 
     //NSLog(@"Resize event");
@@ -344,7 +345,7 @@ LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
         window->keys[key] = LVND_STATE_PRESSED;
     //}
 
-    //PROCESS_MODIFIERS(flags, LVND_STATE_RELEASED)
+    PROCESS_MODIFIERS(window->modifiers, flags);
 }
 
 - (void)keyUp:(NSEvent*)event {

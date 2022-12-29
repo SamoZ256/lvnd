@@ -48,6 +48,7 @@ typedef struct LvndWindow {
     //Input states
     LvndState keys[LVND_TOTAL_KEY_COUNT];// = {LVND_STATE_RELEASED};
     LvndState mouseButtons[LVND_TOTAL_MOUSE_BUTTON_COUNT];// = {LVND_STATE_RELEASED};
+    uint16_t modifiers;
 
     int32_t mouseX, mouseY;
     LvndCursorState cursorState;
@@ -80,6 +81,8 @@ void _lvndSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY);
 void _lvndSetCursorState(LvndWindow* window, LvndCursorState state);
 
 void _lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen);
+
+bool _lvndGetModifier(LvndWindow* window, LvndModifier modifier);
 
 //User pointer
 void _lvndSetWindowUserPointer(LvndWindow* window, void* userPtr);
