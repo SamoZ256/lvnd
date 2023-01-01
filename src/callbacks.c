@@ -49,3 +49,10 @@ LvndKeyPressedCallbackFun _lvndSetKeyPressedCallback(LvndWindow* window, LvndKey
 
     return prevCallback;
 }
+
+LvndCharCallbackFun _lvndSetCharCallback(LvndWindow* window, LvndCharCallbackFun callback) {
+    LvndCharCallbackFun prevCallback = window->callbacks.charCallback;
+    window->callbacks.charCallback = callback;
+
+    return prevCallback;
+}

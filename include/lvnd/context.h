@@ -8,6 +8,8 @@
 #include "window_params.h"
 
 typedef struct LvndContext {
+    void* platformData;
+
     bool initialized;
     bool hasMenuBar;
     LvndMenuBar* globalMenuBar;

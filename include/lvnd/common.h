@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+#include "platform.h"
+
 #define LVND_VERSION_MAJOR 1
 #define LVND_VERSION_MINOR 0
 #define LVND_VERSION_REVISION 0

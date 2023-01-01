@@ -5,11 +5,15 @@
 #include <stdbool.h>
 #include <assert.h>
 
-#ifdef __APPLE__
+#include "common.h"
+
+#ifdef __MACOS__
 #include "cocoa/cocoa_handle.h"
-#elif defined linux
+#elif defined(__IOS__)
+#include "uikit/uikit_handle.h"
+#elif defined(__LINUX__)
 #include "x11/x11_handle.h"
-#elif defined _WIN32
+#elif defined(__WIN32__)
 #include "win32/win32_handle.h"
 #endif
 
@@ -18,11 +22,13 @@
 
 //Window
 typedef struct LvndWindow {
-#ifdef __APPLE__
+#ifdef __MACOS__
     Cocoa_LvndWindowHandle* handle;
-#elif defined linux
+#elif defined(__IOS__)
+    UIKit_LvndWindowHandle* handle;
+#elif defined(__LINUX__)
     X11_LvndWindowHandle* handle;
-#elif defined _WIN32
+#elif defined(__WIN32__)
     Win32_LvndWindowHandle* handle;
 #endif
     bool contextInitialized;
@@ -37,6 +43,7 @@ typedef struct LvndWindow {
         void (*mouseButtonPressedCallback)(struct LvndWindow*, LvndMouseButton, LvndState);
         void (*scrollCallback)(struct LvndWindow*, double, double);
         void (*keyPressedCallback)(struct LvndWindow*, LvndKey, LvndState);
+        void (*charCallback)(struct LvndWindow*, uint16_t);
     } callbacks;
 
     uint16_t width, height;
@@ -44,6 +51,7 @@ typedef struct LvndWindow {
     float framebufferScaleX, framebufferScaleY;
 
     bool isOpen;
+    bool isMaximized;
 
     //Input states
     LvndState keys[LVND_TOTAL_KEY_COUNT];// = {LVND_STATE_RELEASED};
@@ -83,6 +91,9 @@ void _lvndSetCursorState(LvndWindow* window, LvndCursorState state);
 void _lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen);
 
 bool _lvndGetModifier(LvndWindow* window, LvndModifier modifier);
+
+//Crosss-platform main loop
+int _lvndMainLoop(LvndWindow* window, void (*updateFrame)(void));
 
 //User pointer
 void _lvndSetWindowUserPointer(LvndWindow* window, void* userPtr);

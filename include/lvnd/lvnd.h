@@ -409,6 +409,15 @@ static inline bool lvndGetModifier(LvndWindow* window, LvndModifier modifier) {
     return _lvndGetModifier(window, modifier);
 }
 
+static inline int lvndMainLoop(LvndWindow* window, void (*updateFrame)(void)) {
+#ifdef LVND_DEBUG
+    LVND_VALIDATE_INIT;
+    LVND_VALIDATE_WINDOW(window);
+    LVND_VALIDATE_POINTER(updateFrame);
+#endif
+    return _lvndMainLoop(window, updateFrame);
+}
+
 static inline void lvndSetWindowUserPointer(LvndWindow* window, void* userPtr) {
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
@@ -488,6 +497,15 @@ static inline LvndKeyPressedCallbackFun lvndSetKeyPressedCallback(LvndWindow* wi
     LVND_VALIDATE_POINTER(callback);
 #endif
     return _lvndSetKeyPressedCallback(window, callback);
+}
+
+static inline LvndCharCallbackFun lvndSetCharCallback(LvndWindow* window, LvndCharCallbackFun callback) {
+#ifdef LVND_DEBUG
+    LVND_VALIDATE_INIT;
+    LVND_VALIDATE_WINDOW(window);
+    LVND_VALIDATE_POINTER(callback);
+#endif
+    return _lvndSetCharCallback(window, callback);
 }
 
 #ifdef LVND_BACKEND_VULKAN

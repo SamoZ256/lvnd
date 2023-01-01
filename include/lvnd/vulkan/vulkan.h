@@ -3,9 +3,11 @@
 
 #include <stdlib.h>
 
-#ifdef __APPLE__
+#include "../common.h"
+
+#ifdef __MACOS__
 #define VK_USE_PLATFORM_MACOS_MVK
-#elif defined linux
+#elif defined(__LINUX__)
 #define VK_USE_PLATFORM_XLIB_KHR
 #endif
 #include <vulkan/vulkan.h>

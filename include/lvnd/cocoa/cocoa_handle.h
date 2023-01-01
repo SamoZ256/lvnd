@@ -16,7 +16,7 @@ typedef struct Cocoa_LvndWindowHandle {
     void* openglPixelFormat; //OpenGL optional
 
     bool isRetina;
-    bool occluded;
+    bool isOccluded;
     uint64_t frequency;
 } Cocoa_LvndWindowHandle;
 

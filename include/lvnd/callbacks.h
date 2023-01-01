@@ -18,6 +18,8 @@ typedef void (*LvndScrollCallbackFun)(LvndWindow* window, double xoffset, double
 
 typedef void (*LvndKeyPressedCallbackFun)(LvndWindow* window, LvndKey key, LvndState state);
 
+typedef void (*LvndCharCallbackFun)(LvndWindow* window, uint16_t c);
+
 //Callback interface
 LvndWindowResizeCallbackFun _lvndSetWindowResizeCallback(LvndWindow* window, LvndWindowResizeCallbackFun callback);
 
@@ -32,5 +34,7 @@ LvndMouseButtonPressedCallbackFun _lvndSetMouseButtonPressedCallback(LvndWindow*
 LvndScrollCallbackFun _lvndSetScrollCallback(LvndWindow* window, LvndScrollCallbackFun callback);
 
 LvndKeyPressedCallbackFun _lvndSetKeyPressedCallback(LvndWindow* window, LvndKeyPressedCallbackFun callback);
+
+LvndCharCallbackFun _lvndSetCharCallback(LvndWindow* window, LvndCharCallbackFun callback);
 
 #endif

@@ -80,6 +80,12 @@ LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
         //NSLog(@"Resized: %d, %d", window->width, window->height);
     }
 
+    bool isMaximized = [(id)window->handle->window isZoomed];
+    if (window->isMaximized != isMaximized) {
+        window->isMaximized = isMaximized;
+        //TODO: implement maximize callback
+    }
+
     //if (window->framebufferWidth != fbRect.size.width || window->framebufferHeight != fbRect.size.height) {
     //}
 
@@ -118,9 +124,9 @@ LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
 
 - (void)windowDidChangeOcclusionState:(NSNotification*)notification {
     if ([(id)window->handle->window occlusionState] & NSWindowOcclusionStateVisible)
-        window->handle->occluded = true;
+        window->handle->isOccluded = true;
     else
-        window->handle->occluded = false;
+        window->handle->isOccluded = false;
 }
 
 @end
@@ -330,7 +336,7 @@ LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
 }
 
 - (void)flagsChanged:(NSEvent *)event {
-    const NSUInteger flags = [event modifierFlags];
+    //const NSUInteger flags = [event modifierFlags];
     const uint16_t nsKey = [event keyCode];
     //if (flags & NSEventModifierFlagShift)
     //    NSLog(@"Shift pressed in obj-c");
@@ -345,7 +351,7 @@ LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
         window->keys[key] = LVND_STATE_PRESSED;
     //}
 
-    PROCESS_MODIFIERS(window->modifiers, flags);
+    PROCESS_MODIFIERS(window->modifiers, [event modifierFlags]);
 }
 
 - (void)keyUp:(NSEvent*)event {
@@ -429,7 +435,37 @@ LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
 }
 
 - (void)insertText:(id)string replacementRange:(NSRange)replacementRange {
-    
+    NSString* characters;
+    NSEvent* event = [NSApp currentEvent];
+    uint16_t mods;
+    PROCESS_MODIFIERS(mods, [event modifierFlags]);
+    const int plain = !(mods & LVND_MODIFIER_SUPER);
+
+    if ([string isKindOfClass:[NSAttributedString class]])
+        characters = [string string];
+    else
+        characters = (NSString*) string;
+
+    NSRange range = NSMakeRange(0, [characters length]);
+    while (range.length) {
+        uint32_t codepoint = 0;
+
+        if ([characters getBytes:&codepoint
+                       maxLength:sizeof(codepoint)
+                      usedLength:NULL
+                        encoding:NSUTF32StringEncoding
+                         options:0
+                           range:range
+                  remainingRange:&range])
+        {
+            if (codepoint >= 0xf700 && codepoint <= 0xf7ff)
+                continue;
+
+            //_glfwInputChar(window, codepoint, mods, plain);
+            if (window->callbacks.charCallback != NULL)
+                window->callbacks.charCallback(window, codepoint);
+        }
+    }
 }
 
 - (void)doCommandBySelector:(SEL)selector {
@@ -466,9 +502,9 @@ void cocoa_lvndCreateWindow(LvndWindow* window, uint16_t width, uint16_t height,
     window->handle = (Cocoa_LvndWindowHandle*)malloc(sizeof(Cocoa_LvndWindowHandle));
 
     //Occluded
-    window->handle->occluded = false;
+    window->handle->isOccluded = false;
 
-    //Frequency
+    //Frequency //TODO: move this to other APIs as well
     mach_timebase_info_data_t timeInfo;
     mach_timebase_info(&timeInfo);
     window->handle->frequency = (timeInfo.denom * 1e9) / timeInfo.numer;
@@ -611,8 +647,25 @@ void cocoa_lvndSetCursorState(LvndWindow* window, LvndCursorState state) {
 }
 
 void cocoa_lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen) {
+    @autoreleasepool {
+    
+    //TODO: replace this with checking if app is already zoomed
     if (fullscreen)
-        ;//[(id)window->handle->window toggleFullScreen];
+        [(id)window->handle->window zoom:nil];//[(id)window->handle->window toggleFullScreen];
     else
         ; //TODO: implement this
+    
+    }
+}
+
+//Cross-platform main loop
+int cocoa_lvndMainLoop(LvndWindow* window, void (*updateFrame)(void)) {
+    while (window->isOpen) {
+        cocoa_lvndPollEvents();
+
+        if (updateFrame != NULL)
+            updateFrame();
+    }
+
+    return 0;
 }

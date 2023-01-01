@@ -1,10 +1,12 @@
 #include "lvnd/window.h"
 
-#ifdef __APPLE__
+#ifdef __MACOS__
 #include "lvnd/cocoa/cocoa_window.h"
-#elif defined linux
+#elif defined(__IOS__)
+#include "lvnd/uikit/uikit_window.h"
+#elif defined(__LINUX__)
 #include "lvnd/x11/x11_window.h"
-#elif defined _WIN32
+#elif defined(__WIN32__)
 #include "lvnd/win32/win32_window.h"
 #endif
 
@@ -12,11 +14,13 @@
 
 LvndWindow* _lvndCreateWindow(uint16_t width, uint16_t height, const char* title) {
     LvndWindow* window = (LvndWindow*)malloc(sizeof(LvndWindow));
-#ifdef __APPLE__
+#ifdef __MACOS__
     cocoa_lvndCreateWindow(window, width, height, title);
-#elif defined linux
+#elif defined(__IOS__)
+    uikit_lvndCreateWindow(window);
+#elif defined(__LINUX__)
     x11_lvndCreateWindow(window, width, height, title);
-#elif defined _WIN32
+#elif defined(__WIN32__)
     win32_lvndCreateWindow(window, width, height, title);
 #endif
     window->contextInitialized = false;
@@ -25,10 +29,6 @@ LvndWindow* _lvndCreateWindow(uint16_t width, uint16_t height, const char* title
     window->width = width;
     window->height = height;
     window->isOpen = true;
-
-    //TODO: find scale programatically instead of hardcoding it
-    //window->framebufferScaleX = 2.0f;
-    //window->framebufferScaleY = 2.0f;
 
     //Inputs
     for (uint16_t i = 0; i < LVND_TOTAL_KEY_COUNT; i++)
@@ -55,22 +55,24 @@ LvndWindow* _lvndCreateWindow(uint16_t width, uint16_t height, const char* title
 }
 
 void _lvndDestroyWindow(LvndWindow* window) {
-#ifdef __APPLE__
+#ifdef __MACOS__
     cocoa_lvndDestroyWindow(window);
-#elif defined linux
+#elif defined(__IOS__)
+    uikit_lvndDestroyWindow(window);
+#elif defined(__LINUX__)
     x11_lvndDestroyWindow(window);
-#elif defined _WIN32
+#elif defined(__WIN32__)
     win32_lvndDestroyWindow(window);
 #endif
     free(window);
 }
 
 void _lvndPollEvents(LvndWindow* window) {
-#ifdef __APPLE__
+#ifdef __MACOS__
     cocoa_lvndPollEvents();
-#elif defined linux
+#elif defined(__LINUX__)
     x11_lvndPollEvents(window);
-#elif defined _WIN32
+#elif defined(__WIN32__)
     win32_lvndPollEvents(window);
 #endif
 }
@@ -80,11 +82,11 @@ bool _lvndWindowIsOpen(LvndWindow* window) {
 }
 
 void _lvndSetWindowTitle(LvndWindow* window, const char* title) {
-#ifdef __APPLE__
+#ifdef __MACOS__
     cocoa_lvndSetWindowTitle(window, title);
-#elif defined linux
+#elif defined(__LINUX__)
     x11_lvndSetWindowTitle(window, title);
-#elif defined _WIN32
+#elif defined(__WIN32__)
     win32_lvndSetWindowTitle(window, title);
 #endif
 }
@@ -118,37 +120,50 @@ void _lvndGetCursorPosition(LvndWindow* window, int32_t* mouseX, int32_t* mouseY
 }
 
 void _lvndSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY) {
-#ifdef __APPLE__
+#ifdef __MACOS__
     cocoa_lvndWindowSetCursorPosition(window, mouseX, mouseY);
-#elif defined linux
+#elif defined(__LINUX__)
     x11_lvndWindowSetCursorPosition(window, mouseX, mouseY);
-#elif defined _WIN32
+#elif defined(__WIN32__)
     win32_lvndWindowSetCursorPosition(window, mouseX, mouseY);
 #endif
 }
 
 void _lvndSetCursorState(LvndWindow* window, LvndCursorState state) {
-#ifdef __APPLE__
+#ifdef __MACOS__
     cocoa_lvndSetCursorState(window, state);
-#elif defined linux
+#elif defined(__LINUX__)
     x11_lvndSetCursorState(window, state);
-#elif defined _WIN32
+#elif defined(__WIN32__)
     win32_lvndSetCursorState(window, state);
 #endif
 }
 
 void _lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen) {
-#ifdef __APPLE__
+#ifdef __MACOS__
     cocoa_lvndSetWindowFullscreenMode(window, fullscreen);
-#elif defined linux
+#elif defined(__LINUX__)
     x11_lvndSetWindowFullscreenMode(window, fullscreen);
-#elif defined _WIN32
+#elif defined(__WIN32__)
     win32_lvndSetWindowFullscreenMode(window, fullscreen);
 #endif
 }
 
 bool _lvndGetModifier(LvndWindow* window, LvndModifier modifier) {
     return window->modifiers & modifier;
+}
+
+//Crosss-platform main loop
+int _lvndMainLoop(LvndWindow* window, void (*updateFrame)(void)) {
+#ifdef __MACOS__
+    return cocoa_lvndMainLoop(window, updateFrame);
+#elif defined(__IOS__)
+    return uikit_lvndMainLoop(window, updateFrame);
+#elif defined(__LINUX__)
+    return x11_lvndMainLoop(window, updateFrame);
+#elif defined(__WIN32__)
+    return win32_lvndMainLoop(window, updateFrame);
+#endif
 }
 
 //User pointer

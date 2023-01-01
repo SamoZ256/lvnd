@@ -25,7 +25,7 @@ void cocoa_lvndMetalDestroyLayer(LvndWindow* window) {
 }
 
 void* cocoa_lvndMetalNextDrawable(LvndWindow* window) {
-    CAMetalLayer* metalLayer = (__bridge CAMetalLayer*) window->handle->layer;
+    CAMetalLayer* metalLayer = (__bridge CAMetalLayer*)window->handle->layer;
 
     return [metalLayer nextDrawable];
 }

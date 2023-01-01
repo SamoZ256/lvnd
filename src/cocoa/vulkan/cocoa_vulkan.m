@@ -1,5 +1,7 @@
 #include "lvnd/cocoa/vulkan/cocoa_vulkan.h"
 
+#include <vulkan/vulkan_metal.h>
+
 #import <QuartzCore/QuartzCore.h>
 #import <Cocoa/Cocoa.h>
 
@@ -12,13 +14,13 @@ VkResult cocoa_lvndVulkanCreateWindowSurface(LvndWindow* window, VkInstance inst
     nswindow.contentView.layer = layer;
     nswindow.contentView.wantsLayer = YES;
 
-    VkMacOSSurfaceCreateInfoMVK surfaceCreateInfo;
-    surfaceCreateInfo.sType = VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK;
+    VkMetalSurfaceCreateInfoEXT surfaceCreateInfo;
+    surfaceCreateInfo.sType = VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT;
     surfaceCreateInfo.pNext = NULL;
-    surfaceCreateInfo.pView = window->handle->view;
+    surfaceCreateInfo.pLayer = window->handle->layer;
     surfaceCreateInfo.flags = 0;
     
-    return vkCreateMacOSSurfaceMVK(instance, &surfaceCreateInfo, NULL, surface);
+    return vkCreateMetalSurfaceEXT(instance, &surfaceCreateInfo, NULL, surface);
 }
 
 void cocoa_lvndVulkanDestroyLayer(LvndWindow* window) {

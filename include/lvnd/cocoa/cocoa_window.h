@@ -17,4 +17,7 @@ void cocoa_lvndSetCursorState(LvndWindow* window, LvndCursorState state);
 
 void cocoa_lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen);
 
+//Cross-platform main loop
+int cocoa_lvndMainLoop(LvndWindow* window, void (*updateFrame)(void));
+
 #endif
