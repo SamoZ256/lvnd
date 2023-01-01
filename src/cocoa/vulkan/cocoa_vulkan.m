@@ -17,7 +17,7 @@ VkResult cocoa_lvndVulkanCreateWindowSurface(LvndWindow* window, VkInstance inst
     VkMetalSurfaceCreateInfoEXT surfaceCreateInfo;
     surfaceCreateInfo.sType = VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT;
     surfaceCreateInfo.pNext = NULL;
-    surfaceCreateInfo.pLayer = window->handle->layer;
+    surfaceCreateInfo.pLayer = layer;
     surfaceCreateInfo.flags = 0;
     
     return vkCreateMetalSurfaceEXT(instance, &surfaceCreateInfo, NULL, surface);
