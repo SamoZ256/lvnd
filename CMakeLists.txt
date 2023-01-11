@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
+set(PROJECT_NAME lvnd)
+
 set(CMAKE_BUILD_TYPE Release)
 
 add_compile_options(
-    -O2
+    -O3
 )
 
 set(LINUX False)
@@ -61,18 +63,18 @@ endif ()
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib/${BACKEND})
 
-project(lvnd)
+project(${PROJECT_NAME})
 
 file(GLOB src
     src/*.c
     src/${PLATFORM}/*.${PLATFORM_SRC_FILE_EXT}
 )
 
-add_library(lvnd SHARED
+add_library(${PROJECT_NAME} SHARED
     ${src}
 )
 
-set_target_properties(lvnd PROPERTIES SOVERSION 1)
+set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION 1)
 
 include_directories(
     "include"
@@ -81,7 +83,7 @@ include_directories(
 if (APPLE)
     find_library(QUARTZCORE_LIB QuartzCore)
 
-    target_link_libraries(lvnd "-framework Cocoa" ${QUARTZCORE_LIB})
+    target_link_libraries(${PROJECT_NAME} "-framework Cocoa" ${QUARTZCORE_LIB})
 elseif (LINUX)
     find_package(X11 REQUIRED)
 
@@ -98,7 +100,7 @@ if (BACKEND_VULKAN)
         src/${PLATFORM}/vulkan/*.${PLATFORM_SRC_FILE_EXT}
     )
 
-    target_sources(lvnd PRIVATE
+    target_sources(${PROJECT_NAME} PRIVATE
         ${vulkanSrc}
     )
 
@@ -110,7 +112,7 @@ if (BACKEND_VULKAN)
         )
     endif ()
 
-    target_link_libraries(lvnd
+    target_link_libraries(${PROJECT_NAME}
         ${Vulkan_LIBRARIES}
     )
 elseif (BACKEND_METAL)
@@ -119,7 +121,7 @@ elseif (BACKEND_METAL)
         src/${PLATFORM}/metal/*.m
     )
 
-    target_sources(lvnd PRIVATE
+    target_sources(${PROJECT_NAME} PRIVATE
         ${metalSrc}
     )
 elseif (BACKEND_OPENGL)
@@ -128,7 +130,7 @@ elseif (BACKEND_OPENGL)
         src/${PLATFORM}/opengl/*.${PLATFORM_SRC_FILE_EXT}
     )
 
-    target_sources(lvnd PRIVATE
+    target_sources(${PROJECT_NAME} PRIVATE
         ${openglSrc}
     )
 endif ()

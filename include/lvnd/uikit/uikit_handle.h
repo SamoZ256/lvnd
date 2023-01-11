@@ -8,6 +8,7 @@ typedef struct UIKit_LvndWindowHandle {
     void* viewController;
     void* layer;
 
+    void (*start)(void);
     void (*updateFrame)(void);
 } UIKit_LvndWindowHandle;
 

@@ -52,3 +52,12 @@ void lvndVectorFree(LvndVector* vector) {
     free(vector->items);
     vector->items = NULL;
 }
+
+void lvndVectorEraseFirst(LvndVector* vector) {
+    vector->size--;
+    //vector->items = realloc(vector->items + sizeof(void*), sizeof(void*) * vector->capacity);
+    for(uint32_t i = 0; i < vector->size; i++) {
+        vector->items[i] = vector->items[i + 1];
+    }
+    vector->items = realloc(vector->items, vector->capacity * sizeof(void*));
+}

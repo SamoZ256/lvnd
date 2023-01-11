@@ -25,4 +25,6 @@ void lvndVectorDelete(LvndVector* vector, int index);
 
 void lvndVectorFree(LvndVector* vector);
 
+void lvndVectorEraseFirst(LvndVector* vector);
+
 #endif

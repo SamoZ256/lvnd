@@ -154,15 +154,15 @@ bool _lvndGetModifier(LvndWindow* window, LvndModifier modifier) {
 }
 
 //Crosss-platform main loop
-int _lvndMainLoop(LvndWindow* window, void (*updateFrame)(void)) {
+int _lvndMainLoop(LvndWindow* window, void (*start)(void), void (*updateFrame)(void)) {
 #ifdef __MACOS__
-    return cocoa_lvndMainLoop(window, updateFrame);
+    return cocoa_lvndMainLoop(window, start, updateFrame);
 #elif defined(__IOS__)
-    return uikit_lvndMainLoop(window, updateFrame);
+    return uikit_lvndMainLoop(window, start, updateFrame);
 #elif defined(__LINUX__)
-    return x11_lvndMainLoop(window, updateFrame);
+    return x11_lvndMainLoop(window, start, updateFrame);
 #elif defined(__WIN32__)
-    return win32_lvndMainLoop(window, updateFrame);
+    return win32_lvndMainLoop(window, start, updateFrame);
 #endif
 }
 

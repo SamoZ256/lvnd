@@ -93,7 +93,7 @@ void _lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen);
 bool _lvndGetModifier(LvndWindow* window, LvndModifier modifier);
 
 //Crosss-platform main loop
-int _lvndMainLoop(LvndWindow* window, void (*updateFrame)(void));
+int _lvndMainLoop(LvndWindow* window, void (*start)(void), void (*updateFrame)(void));
 
 //User pointer
 void _lvndSetWindowUserPointer(LvndWindow* window, void* userPtr);

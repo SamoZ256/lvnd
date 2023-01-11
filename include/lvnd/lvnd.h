@@ -66,7 +66,7 @@ static inline LvndMenuItem* lvndCreateMenuItem(const char* title, void (*action)
  * 
  *  @return A newly created menu object.
 */
-static inline LvndMenu* lvndCreateMenu(const char* title) {
+static inline lvndCreateMenu(const char* title) {
 #ifdef LVND_DEBUG
     LVND_VALIDATE_POINTER(title);
 #endif
@@ -409,13 +409,13 @@ static inline bool lvndGetModifier(LvndWindow* window, LvndModifier modifier) {
     return _lvndGetModifier(window, modifier);
 }
 
-static inline int lvndMainLoop(LvndWindow* window, void (*updateFrame)(void)) {
+static inline int lvndMainLoop(LvndWindow* window, void (*start)(void), void (*updateFrame)(void)) {
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
     LVND_VALIDATE_WINDOW(window);
     LVND_VALIDATE_POINTER(updateFrame);
 #endif
-    return _lvndMainLoop(window, updateFrame);
+    return _lvndMainLoop(window, start, updateFrame);
 }
 
 static inline void lvndSetWindowUserPointer(LvndWindow* window, void* userPtr) {

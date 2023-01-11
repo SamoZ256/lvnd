@@ -659,7 +659,10 @@ void cocoa_lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen) {
 }
 
 //Cross-platform main loop
-int cocoa_lvndMainLoop(LvndWindow* window, void (*updateFrame)(void)) {
+int cocoa_lvndMainLoop(LvndWindow* window, void (*start)(void), void (*updateFrame)(void)) {
+    if (start != NULL)
+        start();
+
     while (window->isOpen) {
         cocoa_lvndPollEvents();
 

@@ -8,7 +8,6 @@
 #import "lvnd/uikit/uikit_view_controller.h"
 
 //View
-/*
 @interface UIKit_LvndView : UIView {
     
 }
@@ -17,32 +16,62 @@
 
 @implementation UIKit_LvndView
 
-- (instancetype)init {
-    self = [super init];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     //NSLog(@"Creating custom view");
     
     return self;
 }
 
-- (void)drawRect:(CGRect)rect {
-    NSLog(@"Drawing");
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UIKit_LvndPlatformData* platformData = (UIKit_LvndPlatformData*)(g_lvndContext.platformData);
+    LvndWindow* window = platformData->window;
+    
+    window->mouseButtons[LVND_MOUSE_BUTTON_LEFT] = LVND_STATE_PRESSED;
+    CGPoint position = [[touches anyObject] locationInView:self];
+    window->mouseX = position.x;
+    window->mouseY = position.y;
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UIKit_LvndPlatformData* platformData = (UIKit_LvndPlatformData*)(g_lvndContext.platformData);
+    LvndWindow* window = platformData->window;
+    
+    window->mouseButtons[LVND_MOUSE_BUTTON_LEFT] = LVND_STATE_RELEASED;
+    CGPoint position = [[touches anyObject] locationInView:self];
+    window->mouseX = position.x;
+    window->mouseY = position.y;
 }
 
 @end
-*/
 
 //View controller
 @implementation UIKit_LvndViewController
 
-/*
 - (void)loadView {
-    self.view = [[UIView alloc] init];
+    [super loadView];
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    
+    self.view = [[UIKit_LvndView alloc] initWithFrame:screenSize];
 }
- */
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    UIKit_LvndPlatformData* platformData = (UIKit_LvndPlatformData*)(g_lvndContext.platformData);
+    LvndWindow* window = platformData->window;
+    
+    window->width = self.view.frame.size.width;
+    window->height = self.view.frame.size.height;
+    //TODO: remove this hardcoding
+    window->framebufferWidth = window->width * 2.0f;
+    window->framebufferHeight = window->height * 2.0f;
+    window->framebufferScaleX = 2.0f;
+    window->framebufferScaleY = 2.0f;
+    
+    if (window->handle->start != NULL)
+        window->handle->start();
 
     //window = g_lvndContext.platformData;
     timer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateFrame)];
@@ -219,7 +248,8 @@ void uikit_lvndDestroyWindow(LvndWindow* window) {
 }
 
 //Cross-platform main loop
-int uikit_lvndMainLoop(LvndWindow* window, void (*updateFrame)(void)) {
+int uikit_lvndMainLoop(LvndWindow* window, void (*start)(void), void (*updateFrame)(void)) {
+    window->handle->start = start;
     window->handle->updateFrame = updateFrame;
     UIKit_LvndPlatformData* platformData = (UIKit_LvndPlatformData*)(g_lvndContext.platformData);
     platformData->window = window;

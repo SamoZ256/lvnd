@@ -26,7 +26,7 @@ void _uikit_lvndMetalCreateLayer() {
     uiViewController->metalLayer.device = (__bridge id<MTLDevice>)platformData->device;
     uiViewController->metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;
     //uiViewController->metalLayer.drawableSize = size;
-    uiViewController->metalLayer.framebufferOnly = YES;
+    uiViewController->metalLayer.framebufferOnly = NO;
     uiViewController->metalLayer.frame = uiViewController.view.layer.frame;
     uiViewController.view.layer.sublayers = nil;
     [uiViewController.view.layer addSublayer:uiViewController->metalLayer];
