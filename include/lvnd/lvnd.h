@@ -66,7 +66,7 @@ static inline LvndMenuItem* lvndCreateMenuItem(const char* title, void (*action)
  * 
  *  @return A newly created menu object.
 */
-static inline lvndCreateMenu(const char* title) {
+static inline LvndMenu* lvndCreateMenu(const char* title) {
 #ifdef LVND_DEBUG
     LVND_VALIDATE_POINTER(title);
 #endif
