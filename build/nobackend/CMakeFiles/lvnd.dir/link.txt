@@ -1,0 +1,3 @@
+C:\MinGW\bin\cmake.exe -E rm -f CMakeFiles\lvnd.dir/objects.a
+C:\MinGW\bin\ar.exe qc CMakeFiles\lvnd.dir/objects.a @CMakeFiles\lvnd.dir\objects1
+C:\MinGW\bin\gcc.exe -O3 -DNDEBUG -shared -o liblvnd.dll -Wl,--out-implib,liblvnd.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles\lvnd.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\lvnd.dir\linkLibs.rsp
