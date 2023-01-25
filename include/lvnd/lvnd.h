@@ -440,7 +440,6 @@ static inline LvndWindowResizeCallbackFun lvndSetWindowResizeCallback(LvndWindow
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
     LVND_VALIDATE_WINDOW(window);
-    LVND_VALIDATE_POINTER(callback);
 #endif
     return _lvndSetWindowResizeCallback(window, callback);
 }
@@ -449,7 +448,6 @@ static inline LvndWindowFocusCallbackFun lvndSetWindowFocusCallback(LvndWindow* 
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
     LVND_VALIDATE_WINDOW(window);
-    LVND_VALIDATE_POINTER(callback);
 #endif
     return _lvndSetWindowFocusCallback(window, callback);
 }
@@ -458,7 +456,6 @@ static inline LvndCursorEnteredCallbackFun lvndSetCursorEnteredCallback(LvndWind
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
     LVND_VALIDATE_WINDOW(window);
-    LVND_VALIDATE_POINTER(callback);
 #endif
     return _lvndSetCursorEnteredCallback(window, callback);
 }
@@ -467,7 +464,6 @@ static inline LvndCursorMovedCallbackFun lvndSetCursorMovedCallback(LvndWindow* 
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
     LVND_VALIDATE_WINDOW(window);
-    LVND_VALIDATE_POINTER(callback);
 #endif
     return _lvndSetCursorMovedCallback(window, callback);
 }
@@ -476,7 +472,6 @@ static inline LvndMouseButtonPressedCallbackFun lvndSetMouseButtonPressedCallbac
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
     LVND_VALIDATE_WINDOW(window);
-    LVND_VALIDATE_POINTER(callback);
 #endif
     return _lvndSetMouseButtonPressedCallback(window, callback);
 }
@@ -485,7 +480,6 @@ static inline LvndScrollCallbackFun lvndSetScrollCallback(LvndWindow* window, Lv
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
     LVND_VALIDATE_WINDOW(window);
-    LVND_VALIDATE_POINTER(callback);
 #endif
     return _lvndSetScrollCallback(window, callback);
 }
@@ -494,7 +488,6 @@ static inline LvndKeyPressedCallbackFun lvndSetKeyPressedCallback(LvndWindow* wi
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
     LVND_VALIDATE_WINDOW(window);
-    LVND_VALIDATE_POINTER(callback);
 #endif
     return _lvndSetKeyPressedCallback(window, callback);
 }
@@ -503,7 +496,6 @@ static inline LvndCharCallbackFun lvndSetCharCallback(LvndWindow* window, LvndCh
 #ifdef LVND_DEBUG
     LVND_VALIDATE_INIT;
     LVND_VALIDATE_WINDOW(window);
-    LVND_VALIDATE_POINTER(callback);
 #endif
     return _lvndSetCharCallback(window, callback);
 }
