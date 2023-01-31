@@ -25,49 +25,31 @@ elseif (WIN32)
     set(PLATFORM win32)
 endif ()
 
-option(BACKEND_VULKAN "Build using vulkan backend" OFF)
-option(BACKEND_METAL "Build using metal backend" OFF)
-option(BACKEND_OPENGL "Build using opengl backend" OFF)
-
-set(BACKEND)
-
-if (BACKEND_VULKAN)
-    message("Building using vulkan backend")
-
-    set(BACKEND vulkan)
-
-    if (APPLE)
-        include_directories(
-            "/Users/samuliak/VulkanSDK/1.3.236.0/macOS/include"
-        )
-    elseif (WIN32)
-        find_package(Vulkan REQUIRED)
-    endif ()
-elseif (BACKEND_METAL)
-    message("Building using metal backend")
-
-    set(BACKEND metal)
-elseif (BACKEND_OPENGL)
-    message("Building using opengl backend")
-
-    set(BACKEND opengl)
-
-    if (APPLE)
-        add_compile_options(
-            -Wno-deprecated-declarations
-        )
-    endif ()
-else ()
-    set(BACKEND nobackend)
+if (APPLE)
+    include_directories(
+        "/Users/samuliak/VulkanSDK/1.3.236.0/macOS/include"
+    )
+elseif (WIN32)
+    find_package(Vulkan REQUIRED)
 endif ()
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib/${BACKEND})
+if (APPLE)
+    add_compile_options(
+        -Wno-deprecated-declarations
+    )
+endif ()
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 
 project(${PROJECT_NAME})
 
 file(GLOB src
     src/*.c
     src/${PLATFORM}/*.${PLATFORM_SRC_FILE_EXT}
+    src/vulkan/*.c
+    src/${PLATFORM}/vulkan/*.${PLATFORM_SRC_FILE_EXT}
+    src/opengl/*.c
+    src/${PLATFORM}/opengl/*.${PLATFORM_SRC_FILE_EXT}
 )
 
 add_library(${PROJECT_NAME} SHARED
@@ -94,28 +76,19 @@ elseif (WIN32)
     #TODO: add windows-specific libraries
 endif ()
 
-if (BACKEND_VULKAN)
-    file(GLOB vulkanSrc
-        src/vulkan/*.c
-        src/${PLATFORM}/vulkan/*.${PLATFORM_SRC_FILE_EXT}
+if (APPLE)
+    find_library (
+        Vulkan_LIBRARIES
+        NAMES vulkan libvulkan # what to look for
+        HINTS "/Users/samuliak/VulkanSDK/1.3.236.0/macOS/lib" # where to look
     )
+endif ()
 
-    target_sources(${PROJECT_NAME} PRIVATE
-        ${vulkanSrc}
-    )
+target_link_libraries(${PROJECT_NAME}
+    ${Vulkan_LIBRARIES}
+)
 
-    if (APPLE)
-        find_library (
-            Vulkan_LIBRARIES
-            NAMES vulkan libvulkan # what to look for
-            HINTS "/Users/samuliak/VulkanSDK/1.3.236.0/macOS/lib" # where to look
-        )
-    endif ()
-
-    target_link_libraries(${PROJECT_NAME}
-        ${Vulkan_LIBRARIES}
-    )
-elseif (BACKEND_METAL)
+if (APPLE)
     file(GLOB metalSrc
         src/metal/*.c
         src/${PLATFORM}/metal/*.m
@@ -123,14 +96,5 @@ elseif (BACKEND_METAL)
 
     target_sources(${PROJECT_NAME} PRIVATE
         ${metalSrc}
-    )
-elseif (BACKEND_OPENGL)
-    file(GLOB openglSrc
-        src/opengl/*.c
-        src/${PLATFORM}/opengl/*.${PLATFORM_SRC_FILE_EXT}
-    )
-
-    target_sources(${PROJECT_NAME} PRIVATE
-        ${openglSrc}
     )
 endif ()

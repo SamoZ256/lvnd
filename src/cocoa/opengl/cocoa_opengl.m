@@ -76,7 +76,7 @@ void cocoa_lvndOpenGLResize(LvndWindow* window) {
 
 void cocoa_lvndOpenGLSwapBuffers(LvndWindow* window) {
     //TODO: do something with the blinking, it's terrible
-    if (window->handle->occluded) {
+    if (window->handle->isOccluded) {
         int interval = 0;
         [(id)window->handle->openglContext getValues:&interval
                                   forParameter:NSOpenGLContextParameterSwapInterval];
