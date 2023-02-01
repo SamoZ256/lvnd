@@ -17,4 +17,7 @@ void x11_lvndSetCursorState(LvndWindow* window, LvndCursorState state);
 
 void x11_lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen);
 
+//Cross-platform main loop
+int x11_lvndMainLoop(LvndWindow* window, void (*start)(void), void (*updateFrame)(void));
+
 #endif

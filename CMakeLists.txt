@@ -29,8 +29,6 @@ if (APPLE)
     include_directories(
         "/Users/samuliak/VulkanSDK/1.3.236.0/macOS/include"
     )
-elseif (WIN32)
-    find_package(Vulkan REQUIRED)
 endif ()
 
 if (APPLE)
@@ -42,6 +40,8 @@ endif ()
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 
 project(${PROJECT_NAME})
+
+find_package(Vulkan REQUIRED)
 
 file(GLOB src
     src/*.c

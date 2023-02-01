@@ -17,7 +17,7 @@ typedef struct X11_LvndWindowHandle {
     GC gc;
 
     GLXContext openglContext; //OpenGL optional
-    GLXWindow openglWindow; //OpenGL optional
+    //GLXWindow openglWindow; //OpenGL optional
 
     unsigned long black, white;
 

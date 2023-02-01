@@ -7,7 +7,6 @@
 
 void x11_lvndOpenGLCreateContext(LvndWindow* window) {
     int attributes[32];
-    GLXFBConfig fbconfig = NULL;
 
     GLXFBConfig* fbconfigs;
     int fbconfigCount;
@@ -35,23 +34,23 @@ void x11_lvndOpenGLCreateContext(LvndWindow* window) {
 
     SET_ATTRIBUTE(None, None);
 
-    window->handle->openglContext = glXCreateNewContext(window->handle->display, fbconfig, GLX_RGBA_TYPE, 0, True);
+    window->handle->openglContext = glXCreateNewContext(window->handle->display, fbconfigs[0], GLX_RGBA_TYPE, 0, True);
     if (!window->handle->openglContext) {
         LVND_ERROR("Failed to create GLX context");
     }
 
-    window->handle->openglWindow = glXCreateWindow(window->handle->display, fbconfig, window->handle->window, NULL);
-    if (!window->handle->openglWindow) {
-        LVND_ERROR("Failed to create GLX window");
-    }
+    //window->handle->openglWindow = glXCreateWindow(window->handle->display, fbconfigs[0], window->handle->window, NULL);
+    //if (!window->handle->openglWindow) {
+    //    LVND_ERROR("Failed to create GLX window");
+    //}
 
-    if(!glXMakeCurrent(window->handle->display, window->handle->openglWindow, window->handle->openglContext)) {
+    if(!glXMakeCurrent(window->handle->display, window->handle->window, window->handle->openglContext)) {
         LVND_ERROR("Failed to make GLX context current");
     }
 }
 
 void x11_lvndOpenGLDestroyContext(LvndWindow* window) {
-    glXDestroyWindow(window->handle->display, window->handle->openglWindow);
+    //glXDestroyWindow(window->handle->display, window->handle->openglWindow);
     glXDestroyContext(window->handle->display, window->handle->openglContext);
 }
 
@@ -60,7 +59,7 @@ void x11_lvndOpenGLResize(LvndWindow* window) {
 }
 
 void x11_lvndOpenGLSwapBuffers(LvndWindow* window) {
-    glXSwapBuffers(window->handle->display, window->handle->openglWindow);
+    glXSwapBuffers(window->handle->display, window->handle->window);
 }
 
 void x11_lvndOpenGLSetSwapInterval(LvndWindow* window, int interval) {
