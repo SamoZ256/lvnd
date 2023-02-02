@@ -65,12 +65,19 @@ include_directories(
 if (APPLE)
     find_library(QUARTZCORE_LIB QuartzCore)
 
-    target_link_libraries(${PROJECT_NAME} "-framework Cocoa" ${QUARTZCORE_LIB})
+    target_link_libraries(${PROJECT_NAME}
+        "-framework Cocoa"
+        ${QUARTZCORE_LIB}
+    )
 elseif (LINUX)
     find_package(X11 REQUIRED)
 
+    message("Xlib: ${X11_LIBRARIES}")
+
     target_link_libraries(${PROJECT_NAME}
         ${X11_LIBRARIES}
+        -lGL
+        -lXm
     )
 elseif (WIN32)
     #TODO: add windows-specific libraries

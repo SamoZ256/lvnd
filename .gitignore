@@ -2,3 +2,5 @@
 build/**
 lib/**
 .vscode/**
+tests/build/**
+tests/bin/**
