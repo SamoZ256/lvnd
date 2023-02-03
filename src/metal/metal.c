@@ -1,31 +1,31 @@
 #include "lvnd/metal/metal.h"
 
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
 #include "lvnd/cocoa/metal/cocoa_metal.h"
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
 #include "lvnd/uikit/metal/uikit_metal.h"
 #endif
 
 void _lvndMetalCreateLayer(LvndWindow* window, uint16_t width, uint16_t height, void* device) {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     cocoa_lvndMetalCreateLayer(window, width, height, device);
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
     uikit_lvndMetalCreateLayer(window, width, height, device);
 #endif
 }
 
 void _lvndMetalDestroyLayer(LvndWindow* window) {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     return cocoa_lvndMetalDestroyLayer(window);
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
     return uikit_lvndMetalDestroyLayer(window);
 #endif
 }
 
 void* _lvndMetalNextDrawable(LvndWindow* window) {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     return cocoa_lvndMetalNextDrawable(window);
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
     return uikit_lvndMetalNextDrawable(window);
 #endif
 }

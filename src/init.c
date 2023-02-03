@@ -7,24 +7,28 @@
 
 #include "lvnd/context.h"
 
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
 #include "lvnd/cocoa/cocoa_init.h"
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
 #include "lvnd/uikit/uikit_init.h"
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+#include "lvnd/wayland/wayland_init.h"
+#elif defined(LVND_PLATFORM_X11)
 #include "lvnd/x11/x11_init.h"
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WIN32)
 #include "lvnd/win32/win32_init.h"
 #endif
 
 void _lvndInit() {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     cocoa_lvndInit();
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
     uikit_lvndInit();
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
     x11_lvndInit();
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+    wayland_lvndInit();
+#elif defined(LVND_PLATFORM_WIN32)
     win32_lvndInit();
 #endif
 

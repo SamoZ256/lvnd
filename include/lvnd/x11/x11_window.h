@@ -11,7 +11,7 @@ void x11_lvndPollEvents(LvndWindow* window);
 
 void x11_lvndSetWindowTitle(LvndWindow* window, const char* title);
 
-void x11_lvndWindowSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY);
+void x11_lvndSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY);
 
 void x11_lvndSetCursorState(LvndWindow* window, LvndCursorState state);
 

@@ -5,9 +5,9 @@
 
 #include "../common.h"
 
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
 #define VK_USE_PLATFORM_MACOS_MVK
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
 #define VK_USE_PLATFORM_XLIB_KHR
 #endif
 #include <vulkan/vulkan.h>

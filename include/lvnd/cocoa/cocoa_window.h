@@ -11,7 +11,7 @@ void cocoa_lvndPollEvents();
 
 void cocoa_lvndSetWindowTitle(LvndWindow* window, const char* title);
 
-void cocoa_lvndWindowSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY);
+void cocoa_lvndSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY);
 
 void cocoa_lvndSetCursorState(LvndWindow* window, LvndCursorState state);
 

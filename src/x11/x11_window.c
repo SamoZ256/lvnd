@@ -70,16 +70,16 @@ void x11_lvndSetWindowTitle(LvndWindow* window, const char* title) {
     XStoreName(window->handle->display, window->handle->window, title);
 }
 
-void x11_lvndWindowSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY) {
-
+void x11_lvndSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY) {
+    //TODO: implement this
 }
 
 void x11_lvndSetCursorState(LvndWindow* window, LvndCursorState state) {
-
+    //TODO: implement this
 }
 
 void x11_lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen) {
-    
+    //TODO: implement this
 }
 
 //Cross-platform main loop

@@ -1,12 +1,14 @@
 #include "lvnd/window.h"
 
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
 #include "lvnd/cocoa/cocoa_window.h"
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
 #include "lvnd/uikit/uikit_window.h"
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
 #include "lvnd/x11/x11_window.h"
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+#include "lvnd/wayland/wayland_window.h"
+#elif defined(LVND_PLATFORM_WIN32)
 #include "lvnd/win32/win32_window.h"
 #endif
 
@@ -14,13 +16,15 @@
 
 LvndWindow* _lvndCreateWindow(uint16_t width, uint16_t height, const char* title) {
     LvndWindow* window = (LvndWindow*)malloc(sizeof(LvndWindow));
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     cocoa_lvndCreateWindow(window, width, height, title);
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
     uikit_lvndCreateWindow(window);
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
     x11_lvndCreateWindow(window, width, height, title);
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+    wayland_lvndCreateWindow(window, width, height, title);
+#elif defined(LVND_PLATFORM_WIN32)
     win32_lvndCreateWindow(window, width, height, title);
 #endif
     window->contextInitialized = false;
@@ -55,24 +59,28 @@ LvndWindow* _lvndCreateWindow(uint16_t width, uint16_t height, const char* title
 }
 
 void _lvndDestroyWindow(LvndWindow* window) {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     cocoa_lvndDestroyWindow(window);
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
     uikit_lvndDestroyWindow(window);
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
     x11_lvndDestroyWindow(window);
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+    wayland_lvndDestroyWindow(window);
+#elif defined(LVND_PLATFORM_WIN32)
     win32_lvndDestroyWindow(window);
 #endif
     free(window);
 }
 
 void _lvndPollEvents(LvndWindow* window) {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     cocoa_lvndPollEvents();
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
     x11_lvndPollEvents(window);
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+    wayland_lvndPollEvents(window);
+#elif defined(LVND_PLATFORM_WIN32)
     win32_lvndPollEvents(window);
 #endif
 }
@@ -82,11 +90,13 @@ bool _lvndWindowIsOpen(LvndWindow* window) {
 }
 
 void _lvndSetWindowTitle(LvndWindow* window, const char* title) {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     cocoa_lvndSetWindowTitle(window, title);
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
     x11_lvndSetWindowTitle(window, title);
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+    wayland_lvndSetWindowTitle(window, title);
+#elif defined(LVND_PLATFORM_WIN32)
     win32_lvndSetWindowTitle(window, title);
 #endif
 }
@@ -120,31 +130,37 @@ void _lvndGetCursorPosition(LvndWindow* window, int32_t* mouseX, int32_t* mouseY
 }
 
 void _lvndSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY) {
-#ifdef __MACOS__
-    cocoa_lvndWindowSetCursorPosition(window, mouseX, mouseY);
-#elif defined(__LINUX__)
-    x11_lvndWindowSetCursorPosition(window, mouseX, mouseY);
-#elif defined(__WIN32__)
-    win32_lvndWindowSetCursorPosition(window, mouseX, mouseY);
+#ifdef LVND_PLATFORM_COCOA
+    cocoa_lvndSetCursorPosition(window, mouseX, mouseY);
+#elif defined(LVND_PLATFORM_X11)
+    x11_lvndSetCursorPosition(window, mouseX, mouseY);
+#elif defined(LVND_PLATFORM_WAYLAND)
+    wayland_lvndSetCursorPosition(window, mouseX, mouseY);
+#elif defined(LVND_PLATFORM_WIN32)
+    win32_lvndSetCursorPosition(window, mouseX, mouseY);
 #endif
 }
 
 void _lvndSetCursorState(LvndWindow* window, LvndCursorState state) {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     cocoa_lvndSetCursorState(window, state);
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
     x11_lvndSetCursorState(window, state);
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+    wayland_lvndSetCursorState(window, state);
+#elif defined(LVND_PLATFORM_WIN32)
     win32_lvndSetCursorState(window, state);
 #endif
 }
 
 void _lvndSetWindowFullscreenMode(LvndWindow* window, bool fullscreen) {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     cocoa_lvndSetWindowFullscreenMode(window, fullscreen);
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
     x11_lvndSetWindowFullscreenMode(window, fullscreen);
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+    wayland_lvndSetWindowFullscreenMode(window, fullscreen);
+#elif defined(LVND_PLATFORM_WIN32)
     win32_lvndSetWindowFullscreenMode(window, fullscreen);
 #endif
 }
@@ -155,13 +171,15 @@ bool _lvndGetModifier(LvndWindow* window, LvndModifier modifier) {
 
 //Crosss-platform main loop
 int _lvndMainLoop(LvndWindow* window, void (*start)(void), void (*updateFrame)(void)) {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     return cocoa_lvndMainLoop(window, start, updateFrame);
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
     return uikit_lvndMainLoop(window, start, updateFrame);
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
     return x11_lvndMainLoop(window, start, updateFrame);
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+    return wayland_lvndMainLoop(window, start, updateFrame);
+#elif defined(LVND_PLATFORM_WIN32)
     return win32_lvndMainLoop(window, start, updateFrame);
 #endif
 }

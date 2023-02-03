@@ -612,7 +612,7 @@ void cocoa_lvndSetWindowTitle(LvndWindow* window, const char* title) {
     [(id)window->handle->window setTitle:@(title)];
 }
 
-void cocoa_lvndWindowSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY) {
+void cocoa_lvndSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY) {
     const NSRect contentRect = [(id)window->handle->view frame];
     const NSRect localRect = NSMakeRect(mouseX, contentRect.size.height - mouseY - 1, 0, 0);
     const NSRect globalRect = [(id)window->handle->window convertRectToScreen:localRect];

@@ -7,13 +7,15 @@
 
 #include "common.h"
 
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
 #include "cocoa/cocoa_handle.h"
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
 #include "uikit/uikit_handle.h"
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
 #include "x11/x11_handle.h"
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+#include "wayland/wayland_handle.h"
+#elif defined(LVND_PLATFORM_WIN32)
 #include "win32/win32_handle.h"
 #endif
 
@@ -22,13 +24,15 @@
 
 //Window
 typedef struct LvndWindow {
-#ifdef __MACOS__
+#ifdef LVND_PLATFORM_COCOA
     Cocoa_LvndWindowHandle* handle;
-#elif defined(__IOS__)
+#elif defined(LVND_PLATFORM_UIKIT)
     UIKit_LvndWindowHandle* handle;
-#elif defined(__LINUX__)
+#elif defined(LVND_PLATFORM_X11)
     X11_LvndWindowHandle* handle;
-#elif defined(__WIN32__)
+#elif defined(LVND_PLATFORM_WAYLAND)
+    Wayland_LvndWindowHandle* handle;
+#elif defined(LVND_PLATFORM_WIN32)
     Win32_LvndWindowHandle* handle;
 #endif
     bool contextInitialized;

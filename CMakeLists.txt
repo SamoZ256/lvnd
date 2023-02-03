@@ -8,6 +8,8 @@ add_compile_options(
     -O3
 )
 
+option(BUILD_USING_WAYLAND OFF)
+
 set(LINUX False)
 if (UNIX AND NOT APPLE)
     set(LINUX True)
@@ -20,7 +22,14 @@ if (APPLE)
     set(PLATFORM cocoa)
     set(PLATFORM_SRC_FILE_EXT m)
 elseif (LINUX)
-    set(PLATFORM x11)
+    if (BUILD_USING_WAYLAND)
+        set(PLATFORM wayland)
+        add_compile_definitions(
+            LVND_PLATFORM_WAYLAND
+        )
+    else ()
+        set(PLATFORM x11)
+    endif ()
 elseif (WIN32)
     set(PLATFORM win32)
 endif ()
@@ -72,12 +81,9 @@ if (APPLE)
 elseif (LINUX)
     find_package(X11 REQUIRED)
 
-    message("Xlib: ${X11_LIBRARIES}")
-
     target_link_libraries(${PROJECT_NAME}
         ${X11_LIBRARIES}
         -lGL
-        -lXm
     )
 elseif (WIN32)
     #TODO: add windows-specific libraries

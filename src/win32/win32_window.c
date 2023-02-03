@@ -57,7 +57,7 @@ void win32_lvndSetWindowTitle(LvndWindow* window, const char* title) {
 
 }
 
-void win32_lvndWindowSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY) {
+void win32_lvndSetCursorPosition(LvndWindow* window, int32_t mouseX, int32_t mouseY) {
 
 }
 
