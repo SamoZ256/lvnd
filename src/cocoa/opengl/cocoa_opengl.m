@@ -101,3 +101,16 @@ void cocoa_lvndOpenGLSetSwapInterval(LvndWindow* window, int interval) {
     [(id)window->handle->openglContext setValues:&interval
                                    forParameter:NSOpenGLContextParameterSwapInterval];
 }
+
+LvndOpenGLProc cocoa_lvndOpenGLGetLoadProc(const char* procname) {
+    CFStringRef symbolName = CFStringCreateWithCString(kCFAllocatorDefault,
+                                                       procname,
+                                                       kCFStringEncodingASCII);
+
+    LvndOpenGLProc symbol = CFBundleGetFunctionPointerForName(g_lvndContext.lastBoundWindow->handle->openglFramework,
+                                                          symbolName);
+
+    CFRelease(symbolName);
+
+    return symbol;
+}

@@ -17,7 +17,7 @@ printf("[lvnd ERROR]::" "%s" ": " msg "\n", __FUNCTION__);
 *************************************************************************/
 #define LVND_VALIDATE_INIT \
 if (!g_lvndContext.initialized) { \
-    LVND_ERROR("Context must be initialized before a call to this function"); \
+    LVND_ERROR("Context must be initialized before a call to this function. Did you forget to call lvndInit()?"); \
 }
 
 #define LVND_VALIDATE_WINDOW(window) \
@@ -32,7 +32,7 @@ if (ptr == NULL) { \
 
 #define LVND_VALIDATE_OPENGL_CONTEXT(window) \
 if (!window->contextInitialized) { \
-    LVND_ERROR("OpenGL context must be initialized before a call to this function"); \
+    LVND_ERROR("OpenGL context must be initialized before a call to this function. Did you forget to call lvndOpenGLCreateContext(window)?"); \
 }
 
 #endif

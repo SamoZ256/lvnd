@@ -607,6 +607,14 @@ static inline void lvndOpenGLSetSwapInterval(LvndWindow* window, int interval) {
     _lvndOpenGLSetSwapInterval(window, interval);
 }
 
+static inline LvndOpenGLProc lvndOpenGLGetLoadProc(const char* procname) {
+#ifdef LVND_DEBUG
+    LVND_VALIDATE_INIT;
+#endif
+
+    return _lvndOpenGLGetLoadProc(procname);
+}
+
 #endif
 
 #ifdef __cplusplus

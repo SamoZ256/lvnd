@@ -13,4 +13,6 @@ void cocoa_lvndOpenGLSwapBuffers(LvndWindow* window);
 
 void cocoa_lvndOpenGLSetSwapInterval(LvndWindow* window, int interval);
 
+LvndOpenGLProc cocoa_lvndOpenGLGetLoadProc(const char* procname);
+
 #endif

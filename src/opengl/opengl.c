@@ -35,9 +35,9 @@ void _lvndOpenGLDestroyContext(LvndWindow* window) {
 #elif defined(LVND_PLATFORM_X11)
     x11_lvndOpenGLDestroyContext(window);
 #elif defined(LVND_PLATFORM_WAYLAND)
-    wayland_lvndOpenGLCreateContext(window);
+    wayland_lvndOpenGLDestroyContext(window);
 #elif defined(LVND_PLATFORM_WIN32)
-    win32_lvndOpenGLCreateContext(window);
+    win32_lvndOpenGLDestroyContext(window);
 #endif
 }
 
@@ -49,9 +49,9 @@ void _lvndOpenGLResize(LvndWindow* window) {
 #elif defined(LVND_PLATFORM_X11)
     x11_lvndOpenGLResize(window);
 #elif defined(LVND_PLATFORM_WAYLAND)
-    wayland_lvndOpenGLCreateContext(window);
+    wayland_lvndOpenGLResize(window);
 #elif defined(LVND_PLATFORM_WIN32)
-    win32_lvndOpenGLCreateContext(window);
+    win32_lvndOpenGLResize(window);
 #endif
 }
 
@@ -63,9 +63,9 @@ void _lvndOpenGLSwapBuffers(LvndWindow* window) {
 #elif defined(LVND_PLATFORM_X11)
     x11_lvndOpenGLSwapBuffers(window);
 #elif defined(LVND_PLATFORM_WAYLAND)
-    wayland_lvndOpenGLCreateContext(window);
+    wayland_lvndOpenGLSwapBuffers(window);
 #elif defined(LVND_PLATFORM_WIN32)
-    win32_lvndOpenGLCreateContext(window);
+    win32_lvndOpenGLSwapBuffers(window);
 #endif
 }
 
@@ -77,8 +77,22 @@ void _lvndOpenGLSetSwapInterval(LvndWindow* window, int interval) {
 #elif defined(LVND_PLATFORM_X11)
     x11_lvndOpenGLSetSwapInterval(window, interval);
 #elif defined(LVND_PLATFORM_WAYLAND)
-    wayland_lvndOpenGLCreateContext(window);
+    wayland_lvndOpenGLSetSwapInterval(window, interval);
 #elif defined(LVND_PLATFORM_WIN32)
-    win32_lvndOpenGLCreateContext(window);
+    win32_lvndOpenGLSetSwapInterval(window, interval);
+#endif
+}
+
+LvndOpenGLProc _lvndOpenGLGetLoadProc(const char* procname) {
+#ifdef LVND_PLATFORM_COCOA
+    cocoa_lvndOpenGLGetLoadProc(procname);
+#elif defined(LVND_PLATFORM_UIKIT)
+    uikit_lvndOpenGLGetLoadProc(procname);
+#elif defined(LVND_PLATFORM_X11)
+    x11_lvndOpenGLGetLoadProc(procname);
+#elif defined(LVND_PLATFORM_WAYLAND)
+    wayland_lvndOpenGLGetLoadProc(procname);
+#elif defined(LVND_PLATFORM_WIN32)
+    win32_lvndOpenGLGetLoadProc(procname);
 #endif
 }

@@ -1,5 +1,9 @@
 #include "lvnd/window.h"
 
+#include <stdlib.h>
+
+#include "lvnd/context.h"
+
 #ifdef LVND_PLATFORM_COCOA
 #include "lvnd/cocoa/cocoa_window.h"
 #elif defined(LVND_PLATFORM_UIKIT)
@@ -11,8 +15,6 @@
 #elif defined(LVND_PLATFORM_WIN32)
 #include "lvnd/win32/win32_window.h"
 #endif
-
-#include <stdlib.h>
 
 LvndWindow* _lvndCreateWindow(uint16_t width, uint16_t height, const char* title) {
     LvndWindow* window = (LvndWindow*)malloc(sizeof(LvndWindow));
@@ -54,6 +56,9 @@ LvndWindow* _lvndCreateWindow(uint16_t width, uint16_t height, const char* title
     window->callbacks.mouseButtonPressedCallback = NULL;
     window->callbacks.scrollCallback = NULL;
     window->callbacks.keyPressedCallback = NULL;
+
+    //Setting as last bound
+    g_lvndContext.lastBoundWindow = window;
 
     return window;
 }

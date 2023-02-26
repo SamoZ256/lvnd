@@ -6,9 +6,11 @@
 #include "input.h"
 #include "menu_bar.h"
 #include "window_params.h"
+#include "window.h"
 
 typedef struct LvndContext {
     void* platformData;
+    LvndWindow* lastBoundWindow;
 
     bool initialized;
     bool hasMenuBar;
