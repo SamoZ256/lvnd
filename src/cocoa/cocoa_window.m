@@ -162,7 +162,7 @@ LvndKey translateKeyNSToLvnd(uint16_t nsKey) {
 - (void)dealloc {
     [trackingArea release];
     [markedText release];
-    [super dealloc];
+    [super release];
 }
 
 - (BOOL)isOpaque {

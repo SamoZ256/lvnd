@@ -1,0 +1,386 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D8EB0E2329E332DF00C656D3 /* menu_bar.c in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E1C29E332DF00C656D3 /* menu_bar.c */; };
+		D8EB0E2429E332DF00C656D3 /* input.c in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E1D29E332DF00C656D3 /* input.c */; };
+		D8EB0E2529E332DF00C656D3 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E1E29E332DF00C656D3 /* vector.c */; };
+		D8EB0E2629E332DF00C656D3 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E1F29E332DF00C656D3 /* window.c */; };
+		D8EB0E2729E332DF00C656D3 /* callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E2029E332DF00C656D3 /* callbacks.c */; };
+		D8EB0E2829E332DF00C656D3 /* init.c in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E2129E332DF00C656D3 /* init.c */; };
+		D8EB0E2929E332DF00C656D3 /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E2229E332DF00C656D3 /* context.c */; };
+		D8EB0E2C29E332F400C656D3 /* uikit_window.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E2A29E332F400C656D3 /* uikit_window.m */; };
+		D8EB0E2D29E332F400C656D3 /* uikit_init.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E2B29E332F400C656D3 /* uikit_init.m */; };
+		D8EB0E3129E3330600C656D3 /* metal.c in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E2E29E3330500C656D3 /* metal.c */; };
+		D8EB0E3529E3330E00C656D3 /* uikit_metal.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EB0E3429E3330E00C656D3 /* uikit_metal.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D8EB0E1229E332A900C656D3 /* lava_window_xcode_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = lava_window_xcode_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8EB0E1C29E332DF00C656D3 /* menu_bar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = menu_bar.c; path = ../../src/menu_bar.c; sourceTree = "<group>"; };
+		D8EB0E1D29E332DF00C656D3 /* input.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = input.c; path = ../../src/input.c; sourceTree = "<group>"; };
+		D8EB0E1E29E332DF00C656D3 /* vector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vector.c; path = ../../src/vector.c; sourceTree = "<group>"; };
+		D8EB0E1F29E332DF00C656D3 /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = window.c; path = ../../src/window.c; sourceTree = "<group>"; };
+		D8EB0E2029E332DF00C656D3 /* callbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = callbacks.c; path = ../../src/callbacks.c; sourceTree = "<group>"; };
+		D8EB0E2129E332DF00C656D3 /* init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = init.c; path = ../../src/init.c; sourceTree = "<group>"; };
+		D8EB0E2229E332DF00C656D3 /* context.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = context.c; path = ../../src/context.c; sourceTree = "<group>"; };
+		D8EB0E2A29E332F400C656D3 /* uikit_window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = uikit_window.m; path = ../../src/uikit/uikit_window.m; sourceTree = "<group>"; };
+		D8EB0E2B29E332F400C656D3 /* uikit_init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = uikit_init.m; path = ../../src/uikit/uikit_init.m; sourceTree = "<group>"; };
+		D8EB0E2E29E3330500C656D3 /* metal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = metal.c; path = ../../src/metal/metal.c; sourceTree = "<group>"; };
+		D8EB0E2F29E3330600C656D3 /* opengl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = opengl.c; path = ../../src/opengl/opengl.c; sourceTree = "<group>"; };
+		D8EB0E3029E3330600C656D3 /* vulkan.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vulkan.c; path = ../../src/vulkan/vulkan.c; sourceTree = "<group>"; };
+		D8EB0E3429E3330E00C656D3 /* uikit_metal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = uikit_metal.m; path = ../../src/uikit/metal/uikit_metal.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D8EB0E0F29E332A900C656D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D8EB0E0829E332A900C656D3 = {
+			isa = PBXGroup;
+			children = (
+				D8EB0E1429E332A900C656D3 /* lava_window_xcode_ios */,
+				D8EB0E1329E332A900C656D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D8EB0E1329E332A900C656D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D8EB0E1229E332A900C656D3 /* lava_window_xcode_ios.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D8EB0E1429E332A900C656D3 /* lava_window_xcode_ios */ = {
+			isa = PBXGroup;
+			children = (
+				D8EB0E2029E332DF00C656D3 /* callbacks.c */,
+				D8EB0E2229E332DF00C656D3 /* context.c */,
+				D8EB0E2129E332DF00C656D3 /* init.c */,
+				D8EB0E1D29E332DF00C656D3 /* input.c */,
+				D8EB0E1C29E332DF00C656D3 /* menu_bar.c */,
+				D8EB0E1E29E332DF00C656D3 /* vector.c */,
+				D8EB0E1F29E332DF00C656D3 /* window.c */,
+				D8EB0E2B29E332F400C656D3 /* uikit_init.m */,
+				D8EB0E2A29E332F400C656D3 /* uikit_window.m */,
+				D8EB0E2E29E3330500C656D3 /* metal.c */,
+				D8EB0E2F29E3330600C656D3 /* opengl.c */,
+				D8EB0E3029E3330600C656D3 /* vulkan.c */,
+				D8EB0E3429E3330E00C656D3 /* uikit_metal.m */,
+			);
+			path = lava_window_xcode_ios;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D8EB0E0D29E332A900C656D3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D8EB0E1129E332A900C656D3 /* lava_window_xcode_ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8EB0E1929E332A900C656D3 /* Build configuration list for PBXNativeTarget "lava_window_xcode_ios" */;
+			buildPhases = (
+				D8EB0E0D29E332A900C656D3 /* Headers */,
+				D8EB0E0E29E332A900C656D3 /* Sources */,
+				D8EB0E0F29E332A900C656D3 /* Frameworks */,
+				D8EB0E1029E332A900C656D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lava_window_xcode_ios;
+			productName = lava_window_xcode_ios;
+			productReference = D8EB0E1229E332A900C656D3 /* lava_window_xcode_ios.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D8EB0E0929E332A900C656D3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					D8EB0E1129E332A900C656D3 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = D8EB0E0C29E332A900C656D3 /* Build configuration list for PBXProject "lava_window_xcode_ios" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D8EB0E0829E332A900C656D3;
+			productRefGroup = D8EB0E1329E332A900C656D3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D8EB0E1129E332A900C656D3 /* lava_window_xcode_ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D8EB0E1029E332A900C656D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D8EB0E0E29E332A900C656D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8EB0E2429E332DF00C656D3 /* input.c in Sources */,
+				D8EB0E2629E332DF00C656D3 /* window.c in Sources */,
+				D8EB0E2729E332DF00C656D3 /* callbacks.c in Sources */,
+				D8EB0E2829E332DF00C656D3 /* init.c in Sources */,
+				D8EB0E3529E3330E00C656D3 /* uikit_metal.m in Sources */,
+				D8EB0E2929E332DF00C656D3 /* context.c in Sources */,
+				D8EB0E2329E332DF00C656D3 /* menu_bar.c in Sources */,
+				D8EB0E2C29E332F400C656D3 /* uikit_window.m in Sources */,
+				D8EB0E3129E3330600C656D3 /* metal.c in Sources */,
+				D8EB0E2D29E332F400C656D3 /* uikit_init.m in Sources */,
+				D8EB0E2529E332DF00C656D3 /* vector.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D8EB0E1729E332A900C656D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D8EB0E1829E332A900C656D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D8EB0E1A29E332A900C656D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DM9P49WY7X;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					/Users/samuliak/Documents/lava_window/include,
+					/Users/samuliak/VulkanSDK/1.3.236.0/macOS/include,
+				);
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "a.lava-window-xcode-ios";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D8EB0E1B29E332A900C656D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DM9P49WY7X;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					/Users/samuliak/Documents/lava_window/include,
+					/Users/samuliak/VulkanSDK/1.3.236.0/macOS/include,
+				);
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "a.lava-window-xcode-ios";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D8EB0E0C29E332A900C656D3 /* Build configuration list for PBXProject "lava_window_xcode_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8EB0E1729E332A900C656D3 /* Debug */,
+				D8EB0E1829E332A900C656D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8EB0E1929E332A900C656D3 /* Build configuration list for PBXNativeTarget "lava_window_xcode_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8EB0E1A29E332A900C656D3 /* Debug */,
+				D8EB0E1B29E332A900C656D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D8EB0E0929E332A900C656D3 /* Project object */;
+}

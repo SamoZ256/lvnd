@@ -1,6 +1,5 @@
 *.DS_Store
-build/**
-lib/**
+**/build/**
+**/lib/**
+**/bin/**
 .vscode/**
-tests/build/**
-tests/bin/**

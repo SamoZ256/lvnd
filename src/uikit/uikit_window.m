@@ -244,7 +244,7 @@ void uikit_lvndCreateWindow(LvndWindow* window) {
 }
 
 void uikit_lvndDestroyWindow(LvndWindow* window) {
-    //TODO: destroy objects
+    [(id)window->handle->viewController release];
 }
 
 //Cross-platform main loop
